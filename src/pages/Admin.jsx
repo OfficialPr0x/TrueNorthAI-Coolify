@@ -1,22 +1,28 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
+import TeamLoginPortal from '../components/admin/TeamLoginPortal'
 
 const Admin = () => {
-  const [isRedirecting, setIsRedirecting] = useState(true)
+  const [isAuthenticated, setIsAuthenticated] = useState(false)
 
-  useEffect(() => {
+  const handleLoginSuccess = () => {
+    setIsAuthenticated(true)
+    
     // Determine the admin dashboard URL based on environment
     const adminUrl = process.env.NODE_ENV === 'production' 
-      ? '/admin-dashboard'  // This would need to be configured in production
+      ? '/admin-dashboard'  // Admin dashboard is served at /admin-dashboard in production
       : 'http://localhost:3001'
 
-    // Add a small delay for better UX
-    const timer = setTimeout(() => {
+    // Redirect to admin dashboard after successful login
+    setTimeout(() => {
       window.location.href = adminUrl
-    }, 1000)
+    }, 500)
+  }
 
-    return () => clearTimeout(timer)
-  }, [])
+  if (!isAuthenticated) {
+    return <TeamLoginPortal onLoginSuccess={handleLoginSuccess} />
+  }
 
+  // Loading state after authentication
   return (
     <div className="min-h-screen bg-gradient-to-br from-royal-50 via-white to-crown-50 flex items-center justify-center">
       <div className="text-center">
@@ -29,7 +35,7 @@ const Admin = () => {
         </div>
         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-royal-600 mx-auto"></div>
         <p className="mt-6 text-lg text-royal-700 font-medium">Redirecting to Admin Dashboard...</p>
-        <p className="mt-2 text-sm text-royal-500">Please wait a moment</p>
+        <p className="mt-2 text-sm text-royal-500">Authentication successful</p>
       </div>
     </div>
   )

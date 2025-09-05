@@ -2,12 +2,14 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { Toaster } from 'react-hot-toast'
 import AdminLayout from './components/layout/AdminLayout'
 import Dashboard from './pages/Dashboard'
+import Pipeline from './pages/Pipeline'
 import BlogManager from './pages/BlogManager'
 import PostEditor from './pages/PostEditor'
 import Analytics from './pages/Analytics'
 import Settings from './pages/Settings'
 import ClientManager from './pages/ClientManager'
 import ProjectManager from './pages/ProjectManager'
+import Tools from './pages/Tools'
 
 function App() {
   return (
@@ -16,11 +18,13 @@ function App() {
         <AdminLayout>
           <Routes>
             <Route path="/" element={<Dashboard />} />
+            <Route path="/pipeline" element={<Pipeline />} />
             <Route path="/blog" element={<BlogManager />} />
             <Route path="/blog/new" element={<PostEditor />} />
             <Route path="/blog/edit/:id" element={<PostEditor />} />
             <Route path="/clients" element={<ClientManager />} />
             <Route path="/projects" element={<ProjectManager />} />
+            <Route path="/tools" element={<Tools />} />
             <Route path="/analytics" element={<Analytics />} />
             <Route path="/settings" element={<Settings />} />
           </Routes>

@@ -1,0 +1,19 @@
+[variables]
+NODE_ENV = "production"
+NIXPACKS_BUILD_CMD = "npm run build"
+NIXPACKS_START_CMD = "npm start"
+
+[phases.setup]
+nixPkgs = ["nodejs-18_x", "npm-9_x"]
+
+[phases.install]
+cmds = [
+  "npm ci",
+  "cd TrueNorthAdmin && npm ci"
+]
+
+[phases.build]
+cmds = ["npm run build"]
+
+[start]
+cmd = "npm start"

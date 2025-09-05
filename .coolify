@@ -1,0 +1,15 @@
+# Coolify deployment configuration
+# This file helps Coolify understand how to deploy your application
+
+# Build configuration
+BUILD_COMMAND=npm run build
+START_COMMAND=npm start
+
+# Port configuration
+PORT=4173
+
+# Health check
+HEALTH_CHECK_PATH=/health
+
+# Environment
+NODE_ENV=production

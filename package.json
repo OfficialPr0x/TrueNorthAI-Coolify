@@ -5,9 +5,13 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "npm run build:main && npm run build:admin && npm run build:combine",
+    "build:main": "vite build",
+    "build:admin": "cd TrueNorthAdmin && npm ci && npm run build",
+    "build:combine": "node scripts/combine-builds.js",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "preview": "vite preview --port 4173 --host",
+    "start": "npm run preview"
   },
   "dependencies": {
     "react": "^18.2.0",

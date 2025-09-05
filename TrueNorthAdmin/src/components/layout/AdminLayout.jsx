@@ -12,7 +12,9 @@ import {
   X,
   LogOut,
   Crown,
-  Bell
+  Bell,
+  GitBranch,
+  Wrench
 } from 'lucide-react'
 
 const AdminLayout = ({ children }) => {
@@ -21,9 +23,11 @@ const AdminLayout = ({ children }) => {
 
   const navigation = [
     { name: 'Dashboard', href: '/', icon: LayoutDashboard },
+    { name: 'Pipeline', href: '/pipeline', icon: GitBranch },
     { name: 'Blog Manager', href: '/blog', icon: FileText },
     { name: 'Clients', href: '/clients', icon: Users },
     { name: 'Projects', href: '/projects', icon: FolderOpen },
+    { name: 'Tools', href: '/tools', icon: Wrench },
     { name: 'Analytics', href: '/analytics', icon: BarChart3 },
     { name: 'Settings', href: '/settings', icon: Settings },
   ]
