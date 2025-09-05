@@ -127,50 +127,35 @@ For any questions or customization needs, contact the True North AI development 
 
 ## 🔒 SSL/HTTPS Configuration
 
-Your application is now configured to support HTTPS. Here's what you need to do for production:
+Your application is configured to work with Coolify's automatic SSL termination. Coolify handles SSL at the reverse proxy level, so your application container serves HTTP while Coolify manages HTTPS.
 
-### Option 1: Using Let's Encrypt (Recommended)
+### Coolify SSL Setup (Current Configuration)
 
-If you're using Coolify or another platform that supports automatic SSL:
+1. **SSL is handled by Coolify's reverse proxy**
+   - Coolify automatically obtains Let's Encrypt certificates
+   - SSL termination happens at the Coolify proxy level
+   - Your application container serves HTTP on port 80
 
-1. **Enable SSL in your deployment platform**
-   - Coolify: Go to your service settings and enable "SSL" or "HTTPS"
-   - This will automatically obtain and renew Let's Encrypt certificates
-
-### Option 2: Manual SSL Certificate Setup
-
-If you need to provide your own certificates:
-
-1. **Obtain SSL certificates** from a trusted CA (Certificate Authority)
-2. **Mount certificates in Docker**:
-   ```bash
-   docker run -v /path/to/fullchain.pem:/etc/ssl/certs/cert.pem \
-              -v /path/to/privkey.pem:/etc/ssl/private/key.pem \
-              your-app
-   ```
-
-3. **Update nginx.conf** to point to your certificate paths:
-   ```nginx
-   ssl_certificate /etc/ssl/certs/cert.pem;
-   ssl_certificate_key /etc/ssl/private/key.pem;
-   ```
+2. **Enable SSL in Coolify:**
+   - Go to your service in Coolify dashboard
+   - Enable SSL/HTTPS in the service settings
+   - Coolify will automatically handle certificate renewal
 
 ### Current Configuration
 
-- ✅ HTTP to HTTPS redirect configured
-- ✅ SSL/TLS protocols: TLSv1.2, TLSv1.3
+- ✅ Optimized for Coolify SSL termination
 - ✅ Security headers added (HSTS, X-Frame-Options, etc.)
-- ✅ HTTP/2 support enabled
-- ⚠️  Using self-signed certificates (replace with real certificates for production)
+- ✅ HTTP/2 support through Coolify proxy
+- ✅ Automatic Let's Encrypt certificate management via Coolify
 
 ### Testing SSL
 
-After deployment, test your SSL setup:
+After deployment with Coolify SSL enabled, test your setup:
 ```bash
 curl -I https://truenorthai.group
 openssl s_client -connect truenorthai.group:443 -servername truenorthai.group
 ```
 
-The browser warning should disappear once you have valid SSL certificates installed.
+The SSL certificate warning should be resolved once Coolify provisions the Let's Encrypt certificate.
 
 **Built with Royal Excellence** 👑
