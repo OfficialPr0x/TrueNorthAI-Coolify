@@ -1,0 +1,101 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+/* Base Styles */
+body {
+  @apply font-modern text-gray-900;
+  background: linear-gradient(135deg, #f8f9fc 0%, #f1f3f8 25%, #e3e8f0 50%, #f1f3f8 75%, #f8f9fc 100%);
+  background-attachment: fixed;
+  line-height: 1.6;
+}
+
+/* Admin Dashboard Specific Styles */
+.admin-card {
+  @apply bg-white/80 backdrop-blur-sm rounded-xl border border-gray-200/50 shadow-lg hover:shadow-xl transition-all duration-300;
+}
+
+.admin-button {
+  @apply bg-royal-gradient text-white font-royal font-semibold px-6 py-3 rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 border-0 cursor-pointer;
+}
+
+.admin-button-secondary {
+  @apply bg-white/80 text-royal-700 font-royal font-semibold px-6 py-3 rounded-xl border border-royal-200 hover:bg-royal-50 transition-all duration-300 cursor-pointer;
+}
+
+.admin-input {
+  @apply w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-royal-400 focus:ring-2 focus:ring-royal-400/20 transition-all duration-200 bg-white/50 backdrop-blur-sm;
+}
+
+.admin-textarea {
+  @apply w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-royal-400 focus:ring-2 focus:ring-royal-400/20 transition-all duration-200 bg-white/50 backdrop-blur-sm min-h-[120px] resize-y;
+}
+
+.admin-select {
+  @apply w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-royal-400 focus:ring-2 focus:ring-royal-400/20 transition-all duration-200 bg-white/50 backdrop-blur-sm cursor-pointer;
+}
+
+/* Status Badges */
+.status-draft {
+  @apply inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-800;
+}
+
+.status-scheduled {
+  @apply inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800;
+}
+
+.status-published {
+  @apply inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  @apply font-royal;
+  text-rendering: optimizeLegibility;
+  font-feature-settings: "kern" 1, "liga" 1;
+}
+
+.text-shadow-admin {
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* Editor Styles */
+.ProseMirror {
+  @apply admin-textarea min-h-[300px] focus:outline-none;
+}
+
+.ProseMirror p {
+  @apply mb-4;
+}
+
+.ProseMirror h1, .ProseMirror h2, .ProseMirror h3 {
+  @apply font-royal font-bold mb-4 mt-6;
+}
+
+.ProseMirror h1 { @apply text-3xl; }
+.ProseMirror h2 { @apply text-2xl; }
+.ProseMirror h3 { @apply text-xl; }
+
+.ProseMirror ul, .ProseMirror ol {
+  @apply ml-6 mb-4;
+}
+
+.ProseMirror li {
+  @apply mb-2;
+}
+
+.ProseMirror blockquote {
+  @apply border-l-4 border-royal-300 pl-4 ml-4 italic text-royal-600;
+}
+
+.ProseMirror code {
+  @apply bg-gray-100 px-2 py-1 rounded text-sm font-mono;
+}
+
+.ProseMirror pre {
+  @apply bg-gray-100 p-4 rounded-lg overflow-x-auto mb-4;
+}
+
+.ProseMirror pre code {
+  @apply bg-transparent p-0;
+}

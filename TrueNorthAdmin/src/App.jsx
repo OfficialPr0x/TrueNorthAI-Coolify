@@ -1,0 +1,45 @@
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { Toaster } from 'react-hot-toast'
+import AdminLayout from './components/layout/AdminLayout'
+import Dashboard from './pages/Dashboard'
+import BlogManager from './pages/BlogManager'
+import PostEditor from './pages/PostEditor'
+import Analytics from './pages/Analytics'
+import Settings from './pages/Settings'
+import ClientManager from './pages/ClientManager'
+import ProjectManager from './pages/ProjectManager'
+
+function App() {
+  return (
+    <Router>
+      <div className="min-h-screen bg-gradient-to-br from-royal-50 via-white to-crown-50">
+        <AdminLayout>
+          <Routes>
+            <Route path="/" element={<Dashboard />} />
+            <Route path="/blog" element={<BlogManager />} />
+            <Route path="/blog/new" element={<PostEditor />} />
+            <Route path="/blog/edit/:id" element={<PostEditor />} />
+            <Route path="/clients" element={<ClientManager />} />
+            <Route path="/projects" element={<ProjectManager />} />
+            <Route path="/analytics" element={<Analytics />} />
+            <Route path="/settings" element={<Settings />} />
+          </Routes>
+        </AdminLayout>
+        <Toaster 
+          position="top-right"
+          toastOptions={{
+            duration: 4000,
+            style: {
+              background: '#4c596d',
+              color: '#fff',
+              borderRadius: '12px',
+              padding: '16px',
+            },
+          }}
+        />
+      </div>
+    </Router>
+  )
+}
+
+export default App
