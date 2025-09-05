@@ -125,4 +125,52 @@ For any questions or customization needs, contact the True North AI development 
 
 ---
 
+## 🔒 SSL/HTTPS Configuration
+
+Your application is now configured to support HTTPS. Here's what you need to do for production:
+
+### Option 1: Using Let's Encrypt (Recommended)
+
+If you're using Coolify or another platform that supports automatic SSL:
+
+1. **Enable SSL in your deployment platform**
+   - Coolify: Go to your service settings and enable "SSL" or "HTTPS"
+   - This will automatically obtain and renew Let's Encrypt certificates
+
+### Option 2: Manual SSL Certificate Setup
+
+If you need to provide your own certificates:
+
+1. **Obtain SSL certificates** from a trusted CA (Certificate Authority)
+2. **Mount certificates in Docker**:
+   ```bash
+   docker run -v /path/to/fullchain.pem:/etc/ssl/certs/cert.pem \
+              -v /path/to/privkey.pem:/etc/ssl/private/key.pem \
+              your-app
+   ```
+
+3. **Update nginx.conf** to point to your certificate paths:
+   ```nginx
+   ssl_certificate /etc/ssl/certs/cert.pem;
+   ssl_certificate_key /etc/ssl/private/key.pem;
+   ```
+
+### Current Configuration
+
+- ✅ HTTP to HTTPS redirect configured
+- ✅ SSL/TLS protocols: TLSv1.2, TLSv1.3
+- ✅ Security headers added (HSTS, X-Frame-Options, etc.)
+- ✅ HTTP/2 support enabled
+- ⚠️  Using self-signed certificates (replace with real certificates for production)
+
+### Testing SSL
+
+After deployment, test your SSL setup:
+```bash
+curl -I https://truenorthai.group
+openssl s_client -connect truenorthai.group:443 -servername truenorthai.group
+```
+
+The browser warning should disappear once you have valid SSL certificates installed.
+
 **Built with Royal Excellence** 👑

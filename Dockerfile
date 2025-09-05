@@ -28,6 +28,12 @@ COPY --from=base /app/TrueNorthAdmin/dist /usr/share/nginx/html/admin-dashboard
 # Copy nginx configuration
 COPY nginx.conf /etc/nginx/nginx.conf
 
-EXPOSE 80
+# Create directories for SSL certificates
+RUN mkdir -p /etc/ssl/certs /etc/ssl/private
+
+# For production, you'll need to mount your actual SSL certificates
+# Example: docker run -v /path/to/cert.pem:/etc/ssl/certs/cert.pem -v /path/to/key.pem:/etc/ssl/private/key.pem
+
+EXPOSE 80 443
 
 CMD ["nginx", "-g", "daemon off;"]
