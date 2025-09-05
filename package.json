@@ -10,8 +10,9 @@
     "build:admin": "cd TrueNorthAdmin && npm ci && npm run build",
     "build:combine": "node scripts/combine-builds.js",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview --port 4173 --host",
-    "start": "npm run preview"
+    "preview": "vite preview",
+    "start": "node server.js",
+    "serve": "node server.js"
   },
   "dependencies": {
     "react": "^18.2.0",
@@ -19,7 +20,8 @@
     "react-router-dom": "^6.20.1",
     "framer-motion": "^10.16.16",
     "lucide-react": "^0.294.0",
-    "react-intersection-observer": "^9.5.3"
+    "react-intersection-observer": "^9.5.3",
+    "express": "^4.18.2"
   },
   "devDependencies": {
     "@types/react": "^18.2.37",
