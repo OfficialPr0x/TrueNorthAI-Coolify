@@ -6,6 +6,7 @@ import Pipeline from './pages/Pipeline'
 import BlogManager from './pages/BlogManager'
 import PostEditor from './pages/PostEditor'
 import Analytics from './pages/Analytics'
+import SEOPanel from './pages/SEOPanel'
 import Settings from './pages/Settings'
 import ClientManager from './pages/ClientManager'
 import ProjectManager from './pages/ProjectManager'
@@ -26,6 +27,7 @@ function App() {
             <Route path="/projects" element={<ProjectManager />} />
             <Route path="/tools" element={<Tools />} />
             <Route path="/analytics" element={<Analytics />} />
+            <Route path="/seo" element={<SEOPanel />} />
             <Route path="/settings" element={<Settings />} />
           </Routes>
         </AdminLayout>

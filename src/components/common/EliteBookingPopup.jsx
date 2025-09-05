@@ -1,22 +1,65 @@
 import { motion, AnimatePresence } from 'framer-motion'
-import { Crown, X, Calendar, Shield, Zap, CheckCircle } from 'lucide-react'
+import { Crown, X, Calendar, Shield, Zap, CheckCircle, Loader } from 'lucide-react'
+import { useState } from 'react'
+import calApi from '../../services/calApi'
 
 const EliteBookingPopup = ({ isOpen, onClose }) => {
+  const [isLoading, setIsLoading] = useState(false)
+  const [bookingError, setBookingError] = useState(null)
+
   const benefits = [
     "Direct access to Jaryd Paquette",
-    "Battle-tested AI strategy session", 
+    "Battle-tested AI strategy session",
     "Custom roadmap for your business",
     "No corporate fluff or sales pitch",
     "Enterprise-grade confidentiality",
     "Canadian sovereignty-first approach"
   ]
 
-  const handleBooking = () => {
-    // This will be replaced with Cal.com integration
-    console.log('Opening Cal.com booking...')
-    // For now, we'll just close the popup
-    // In production, this would open the Cal.com embed or redirect
-    onClose()
+  const handleBooking = async () => {
+    setIsLoading(true)
+    setBookingError(null)
+
+    try {
+      // Get available event types
+      const eventTypes = await calApi.getEventTypes()
+
+      // Find the elite consultation event type (you may need to adjust this based on your Cal.com setup)
+      const eliteEventType = eventTypes.eventTypes?.find(et =>
+        et.title?.toLowerCase().includes('elite') ||
+        et.title?.toLowerCase().includes('consultation') ||
+        et.title?.toLowerCase().includes('strategy')
+      )
+
+      if (eliteEventType) {
+        // Redirect to Cal.com booking page for the specific event type
+        window.open(`https://cal.com/jaryd-paquette/${eliteEventType.slug}`, '_blank')
+      } else if (eventTypes.eventTypes?.length > 0) {
+        // Use the first available event type
+        const firstEventType = eventTypes.eventTypes[0]
+        window.open(`https://cal.com/jaryd-paquette/${firstEventType.slug}`, '_blank')
+      } else {
+        // Fallback: redirect to general Cal.com profile
+        window.open('https://cal.com/jaryd-paquette', '_blank')
+      }
+
+      // Close popup after successful redirect
+      setTimeout(() => {
+        onClose()
+      }, 1000)
+
+    } catch (error) {
+      console.error('Booking error:', error)
+      setBookingError('Unable to connect to booking system. Please try again or contact us directly.')
+
+      // Fallback to email contact
+      setTimeout(() => {
+        window.location.href = 'mailto:jaryd@truenorthai.group?subject=Elite Strategy Session Inquiry'
+        onClose()
+      }, 3000)
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   return (
@@ -141,16 +184,33 @@ const EliteBookingPopup = ({ isOpen, onClose }) => {
                     </span>
                   </div>
 
+                  {/* Error Message */}
+                  {bookingError && (
+                    <div className="bg-red-50 border border-red-200 rounded-lg p-3 mb-4">
+                      <p className="text-red-700 text-sm font-medium">{bookingError}</p>
+                    </div>
+                  )}
+
                   {/* CTA Buttons */}
                   <div className="space-y-3">
                     <motion.button
                       onClick={handleBooking}
-                      className="w-full bg-crown-gradient text-white font-royal font-bold text-lg py-4 px-6 rounded-xl shadow-2xl hover:shadow-crown-500/25 transition-all duration-300 flex items-center justify-center space-x-3"
-                      whileHover={{ scale: 1.02, y: -2 }}
-                      whileTap={{ scale: 0.98 }}
+                      disabled={isLoading}
+                      className="w-full bg-crown-gradient text-white font-royal font-bold text-lg py-4 px-6 rounded-xl shadow-2xl hover:shadow-crown-500/25 transition-all duration-300 flex items-center justify-center space-x-3 disabled:opacity-50 disabled:cursor-not-allowed"
+                      whileHover={!isLoading ? { scale: 1.02, y: -2 } : {}}
+                      whileTap={!isLoading ? { scale: 0.98 } : {}}
                     >
-                      <Calendar className="w-5 h-5" />
-                      <span>Book Your Elite Session Now</span>
+                      {isLoading ? (
+                        <>
+                          <Loader className="w-5 h-5 animate-spin" />
+                          <span>Connecting...</span>
+                        </>
+                      ) : (
+                        <>
+                          <Calendar className="w-5 h-5" />
+                          <span>Book Your Elite Session Now</span>
+                        </>
+                      )}
                     </motion.button>
                     
                     <motion.button

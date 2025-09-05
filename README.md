@@ -119,6 +119,37 @@ src/
 - GDPR compliant design
 - Professional confidentiality messaging
 
+## 📅 Booking System
+
+### Cal.com Integration
+Your website includes a fully integrated booking system powered by Cal.com:
+
+- **Elite Strategy Sessions**: Direct booking for premium consultations
+- **API Integration**: Full Cal.com API v2 integration with live API key
+- **Smart Routing**: Automatically finds and redirects to the correct event type
+- **Fallback System**: Email contact fallback if API fails
+- **Error Handling**: Comprehensive error handling and user feedback
+
+### Booking Features
+- ✅ Real-time availability checking
+- ✅ Automatic event type detection
+- ✅ Secure booking redirects
+- ✅ Loading states and error handling
+- ✅ Email fallback for reliability
+
+### Cal.com Setup
+The system is configured with your production API key (`cal_live_cc827d6744464504735101c54e7327cc`) and will:
+- ✅ Fetch available event types automatically
+- ✅ Redirect users to the appropriate booking page
+- ✅ Handle API failures gracefully with email fallback
+- ✅ Maintain user experience even during outages
+- ✅ API connectivity tested and verified
+
+**Current Status:**
+- 🔗 Connected to: team@truenorthai.group
+- 📅 Event Types: Ready for configuration
+- 📧 Fallback: jaryd@truenorthai.group
+
 ## 📞 Support
 
 For any questions or customization needs, contact the True North AI development team.

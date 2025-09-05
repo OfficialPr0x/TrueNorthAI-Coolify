@@ -1,20 +1,21 @@
 import { useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
-import { 
-  LayoutDashboard, 
-  FileText, 
-  Users, 
+import {
+  LayoutDashboard,
+  FileText,
+  Users,
   FolderOpen,
-  BarChart3, 
-  Settings, 
-  Menu, 
+  BarChart3,
+  Settings,
+  Menu,
   X,
   LogOut,
   Crown,
   Bell,
   GitBranch,
-  Wrench
+  Wrench,
+  Search
 } from 'lucide-react'
 
 const AdminLayout = ({ children }) => {
@@ -29,6 +30,7 @@ const AdminLayout = ({ children }) => {
     { name: 'Projects', href: '/projects', icon: FolderOpen },
     { name: 'Tools', href: '/tools', icon: Wrench },
     { name: 'Analytics', href: '/analytics', icon: BarChart3 },
+    { name: 'SEO Panel', href: '/seo', icon: Search },
     { name: 'Settings', href: '/settings', icon: Settings },
   ]
 
