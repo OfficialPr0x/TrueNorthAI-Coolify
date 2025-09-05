@@ -85,7 +85,7 @@ const Footer = () => {
                 whileHover={{ scale: 1.05, rotate: 2 }}
               >
                 <img 
-                  src="/logo.png" 
+                  src="https://res.cloudinary.com/dyrwj6iwl/image/upload/v1757106723/logo_2_mtcs2m.png" 
                   alt="True North AI Logo" 
                   className="w-full h-full object-contain"
                 />

@@ -44,7 +44,7 @@ const TeamLoginPortal = ({ onLoginSuccess }) => {
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
           <img 
-            src="/logo.png" 
+            src="https://res.cloudinary.com/dyrwj6iwl/image/upload/v1757106723/logo_2_mtcs2m.png" 
             alt="True North AI" 
             className="w-16 h-16 mx-auto mb-4"
           />
