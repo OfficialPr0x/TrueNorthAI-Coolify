@@ -1,8 +1,8 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
-import { 
-  Plus, 
-  Search, 
+import {
+  Plus,
+  Search,
   Filter,
   Users,
   Building2,
@@ -14,14 +14,40 @@ import {
   Star,
   TrendingUp,
   Clock,
-  CheckCircle
+  CheckCircle,
+  Loader
 } from 'lucide-react'
+import apiService from '../services/api'
 
 const ClientManager = () => {
   const [searchTerm, setSearchTerm] = useState('')
   const [statusFilter, setStatusFilter] = useState('all')
+  const [clients, setClients] = useState([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(null)
 
-  const clients = [
+  useEffect(() => {
+    loadClients()
+  }, [])
+
+  const loadClients = async () => {
+    try {
+      setLoading(true)
+      setError(null)
+
+      // Try to load from backend first
+      try {
+        const response = await apiService.getContacts()
+        if (response.success) {
+          setClients(response.data)
+          return
+        }
+      } catch (apiError) {
+        console.log('Backend not available, using sample data')
+      }
+
+      // Fallback to sample data
+      const sampleClients = [
     {
       id: 1,
       name: 'MapleTech Solutions',
@@ -70,7 +96,18 @@ const ClientManager = () => {
       rating: 0,
       tags: ['Logistics', 'AI Automation', 'Prospect']
     }
-  ]
+      ]
+
+      setClients(sampleClients)
+
+    } catch (error) {
+      console.error('Failed to load clients:', error)
+      setError('Failed to load clients')
+      setClients([])
+    } finally {
+      setLoading(false)
+    }
+  }
 
   const getTierColor = (tier) => {
     const colors = {
@@ -132,7 +169,8 @@ const ClientManager = () => {
         <motion.button
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
-          className="admin-button flex items-center space-x-2"
+          onClick={() => window.location.href = '/contacts'}
+          className="admin-button flex items-center space-x-2 cursor-pointer"
         >
           <Plus className="w-5 h-5" />
           <span>Add Client</span>
@@ -141,28 +179,47 @@ const ClientManager = () => {
 
       {/* Stats */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-        {stats.map((stat, index) => {
-          const Icon = stat.icon
-          return (
+        {loading ? (
+          // Loading skeleton
+          Array.from({ length: 4 }).map((_, index) => (
             <motion.div
-              key={stat.title}
+              key={index}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}
               className="admin-card p-6"
             >
               <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-sm text-gray-600 mb-1">{stat.title}</p>
-                  <p className="text-2xl font-royal font-bold text-gray-900">
-                    {stat.value}
-                  </p>
-                </div>
-                <Icon className={`w-8 h-8 ${stat.color}`} />
+                <div className="w-20 h-4 bg-gray-200 rounded animate-pulse mb-2"></div>
+                <div className="w-16 h-8 bg-gray-200 rounded animate-pulse"></div>
+                <div className="w-8 h-8 bg-gray-200 rounded animate-pulse"></div>
               </div>
             </motion.div>
-          )
-        })}
+          ))
+        ) : (
+          stats.map((stat, index) => {
+            const Icon = stat.icon
+            return (
+              <motion.div
+                key={stat.title}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.1 }}
+                className="admin-card p-6"
+              >
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-sm text-gray-600 mb-1">{stat.title}</p>
+                    <p className="text-2xl font-royal font-bold text-gray-900">
+                      {stat.value}
+                    </p>
+                  </div>
+                  <Icon className={`w-8 h-8 ${stat.color}`} />
+                </div>
+              </motion.div>
+            )
+          })
+        )}
       </div>
 
       {/* Filters */}
@@ -204,7 +261,48 @@ const ClientManager = () => {
 
       {/* Clients Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {clients.map((client, index) => (
+        {loading ? (
+          // Loading skeleton
+          Array.from({ length: 6 }).map((_, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: index * 0.1 }}
+              className="admin-card p-6"
+            >
+              <div className="flex items-start justify-between mb-4">
+                <div className="flex-1">
+                  <div className="w-32 h-6 bg-gray-200 rounded animate-pulse mb-2"></div>
+                  <div className="w-24 h-4 bg-gray-200 rounded animate-pulse"></div>
+                </div>
+                <div className="flex flex-col items-end space-y-2">
+                  <div className="w-16 h-6 bg-gray-200 rounded-full animate-pulse"></div>
+                  <div className="w-20 h-6 bg-gray-200 rounded-full animate-pulse"></div>
+                </div>
+              </div>
+              <div className="space-y-2 mb-4">
+                <div className="w-full h-4 bg-gray-200 rounded animate-pulse"></div>
+                <div className="w-3/4 h-4 bg-gray-200 rounded animate-pulse"></div>
+              </div>
+              <div className="flex space-x-2">
+                <div className="flex-1 w-full h-8 bg-gray-200 rounded animate-pulse"></div>
+                <div className="flex-1 w-full h-8 bg-gray-200 rounded animate-pulse"></div>
+              </div>
+            </motion.div>
+          ))
+        ) : error ? (
+          <div className="col-span-full admin-card p-6 text-center">
+            <p className="text-red-600 mb-4">{error}</p>
+            <button
+              onClick={loadClients}
+              className="admin-button"
+            >
+              Try Again
+            </button>
+          </div>
+        ) : (
+          clients.map((client, index) => (
           <motion.div
             key={client.id}
             initial={{ opacity: 0, y: 20 }}
@@ -292,15 +390,22 @@ const ClientManager = () => {
 
             {/* Actions */}
             <div className="flex space-x-2">
-              <button className="flex-1 bg-royal-600 hover:bg-royal-700 text-white text-sm font-medium py-2 px-3 rounded-lg transition-colors">
+              <button
+                className="flex-1 bg-royal-600 hover:bg-royal-700 text-white text-sm font-medium py-2 px-3 rounded-lg transition-colors cursor-pointer"
+                onClick={() => alert(`Viewing details for ${client.name}`)}
+              >
                 View Details
               </button>
-              <button className="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 text-sm font-medium py-2 px-3 rounded-lg transition-colors">
+              <button
+                className="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 text-sm font-medium py-2 px-3 rounded-lg transition-colors cursor-pointer"
+                onClick={() => window.open(`mailto:${client.email}`, '_blank')}
+              >
                 Contact
               </button>
             </div>
           </motion.div>
-        ))}
+          ))
+        )}
       </div>
 
       {/* Quick Actions */}
@@ -314,17 +419,26 @@ const ClientManager = () => {
           Quick Actions
         </h3>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <button className="p-4 bg-blue-50 hover:bg-blue-100 rounded-xl transition-colors text-left">
+          <button
+            className="p-4 bg-blue-50 hover:bg-blue-100 rounded-xl transition-colors text-left cursor-pointer"
+            onClick={() => window.location.href = '/calendar'}
+          >
             <Calendar className="w-8 h-8 text-blue-600 mb-2" />
             <h4 className="font-medium text-gray-900">Schedule Follow-up</h4>
             <p className="text-sm text-gray-600">Book meetings with prospects</p>
           </button>
-          <button className="p-4 bg-green-50 hover:bg-green-100 rounded-xl transition-colors text-left">
+          <button
+            className="p-4 bg-green-50 hover:bg-green-100 rounded-xl transition-colors text-left cursor-pointer"
+            onClick={() => alert('Deal closing feature coming soon!')}
+          >
             <CheckCircle className="w-8 h-8 text-green-600 mb-2" />
             <h4 className="font-medium text-gray-900">Close Deals</h4>
             <p className="text-sm text-gray-600">Convert prospects to clients</p>
           </button>
-          <button className="p-4 bg-purple-50 hover:bg-purple-100 rounded-xl transition-colors text-left">
+          <button
+            className="p-4 bg-purple-50 hover:bg-purple-100 rounded-xl transition-colors text-left cursor-pointer"
+            onClick={() => window.location.href = '/analytics'}
+          >
             <TrendingUp className="w-8 h-8 text-purple-600 mb-2" />
             <h4 className="font-medium text-gray-900">Growth Analysis</h4>
             <p className="text-sm text-gray-600">Review client performance</p>

@@ -15,11 +15,15 @@ import {
   Bell,
   GitBranch,
   Wrench,
-  Search
+  Search,
+  Bot,
+  Calendar,
+  Mail
 } from 'lucide-react'
 
 const AdminLayout = ({ children }) => {
   const [sidebarOpen, setSidebarOpen] = useState(false)
+  const [hoveredItem, setHoveredItem] = useState(null)
   const location = useLocation()
 
   const navigation = [
@@ -27,10 +31,22 @@ const AdminLayout = ({ children }) => {
     { name: 'Pipeline', href: '/pipeline', icon: GitBranch },
     { name: 'Blog Manager', href: '/blog', icon: FileText },
     { name: 'Clients', href: '/clients', icon: Users },
+    { name: 'Contacts', href: '/contacts', icon: Users },
+    { name: 'Calendar', href: '/calendar', icon: Calendar },
+    { name: 'Marketing', href: '/marketing', icon: Mail },
     { name: 'Projects', href: '/projects', icon: FolderOpen },
-    { name: 'Tools', href: '/tools', icon: Wrench },
-    { name: 'Analytics', href: '/analytics', icon: BarChart3 },
-    { name: 'SEO Panel', href: '/seo', icon: Search },
+    {
+      name: 'Resources',
+      href: '/tools',
+      icon: Wrench,
+      submenu: [
+        { name: 'All Tools', href: '/tools', icon: Wrench },
+        { name: 'AI Tools', href: '/ai-tools', icon: Bot },
+        { name: 'Analytics', href: '/analytics', icon: BarChart3 },
+        { name: 'SEO Panel', href: '/seo', icon: Search }
+      ]
+    },
+    { name: 'AI Manager', href: '/ai-manager', icon: Bot },
     { name: 'Settings', href: '/settings', icon: Settings },
   ]
 
@@ -59,12 +75,13 @@ const AdminLayout = ({ children }) => {
 
       {/* Sidebar */}
       <motion.div
-        className={`fixed inset-y-0 left-0 z-50 w-64 bg-white shadow-xl transform ${
+        className={`fixed inset-y-0 left-0 z-50 w-64 bg-white shadow-xl transform flex flex-col ${
           sidebarOpen ? 'translate-x-0' : '-translate-x-full'
         } transition-transform duration-300 ease-in-out lg:translate-x-0 lg:static lg:inset-0`}
         initial={false}
       >
-        <div className="flex items-center justify-between h-16 px-6 bg-royal-gradient">
+        {/* Header - Fixed */}
+        <div className="flex items-center justify-between h-16 px-6 bg-royal-gradient flex-shrink-0">
           <Link to="/" className="flex items-center space-x-3">
             <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center">
               <Crown className="w-5 h-5 text-royal-600" />
@@ -82,37 +99,69 @@ const AdminLayout = ({ children }) => {
           </button>
         </div>
 
-        <nav className="mt-8 px-4">
+        {/* Navigation - Scrollable */}
+        <nav className="flex-1 px-4 py-4 overflow-y-auto relative">
           <div className="space-y-2">
-            {navigation.map((item) => {
+            {navigation.map((item, index) => {
               const Icon = item.icon
               const active = isActive(item.href)
-              
+              const hasSubmenu = item.submenu
+
               return (
-                <Link
+                <div
                   key={item.name}
-                  to={item.href}
-                  className={`flex items-center px-4 py-3 text-sm font-medium rounded-xl transition-all duration-200 group ${
-                    active
-                      ? 'bg-royal-100 text-royal-800 shadow-sm'
-                      : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900'
-                  }`}
-                  onClick={() => setSidebarOpen(false)}
+                  className="relative"
+                  onMouseEnter={() => setHoveredItem(hasSubmenu ? index : null)}
+                  onMouseLeave={() => setHoveredItem(null)}
                 >
-                  <Icon
-                    className={`mr-3 h-5 w-5 ${
-                      active ? 'text-royal-600' : 'text-gray-400 group-hover:text-gray-500'
+                  <Link
+                    to={item.href}
+                    className={`flex items-center px-4 py-3 text-sm font-medium rounded-xl transition-all duration-200 group ${
+                      active
+                        ? 'bg-royal-100 text-royal-800 shadow-sm'
+                        : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900'
                     }`}
-                  />
-                  {item.name}
-                </Link>
+                    onClick={() => setSidebarOpen(false)}
+                  >
+                    <Icon
+                      className={`mr-3 h-5 w-5 ${
+                        active ? 'text-royal-600' : 'text-gray-400 group-hover:text-gray-500'
+                      }`}
+                    />
+                    <span className="flex-1">{item.name}</span>
+                  </Link>
+
+                  {/* Submenu */}
+                  {hasSubmenu && hoveredItem === index && (
+                    <div className="absolute left-0 top-full mt-1 w-full bg-white shadow-lg rounded-lg border border-gray-200 py-2 z-50">
+                      {item.submenu.map((subItem) => {
+                        const SubIcon = subItem.icon
+                        const subActive = isActive(subItem.href)
+
+                        return (
+                          <Link
+                            key={subItem.name}
+                            to={subItem.href}
+                            className={`flex items-center px-4 py-2 text-sm hover:bg-gray-50 transition-colors ${
+                              subActive ? 'text-royal-600 bg-royal-50' : 'text-gray-700'
+                            }`}
+                            onClick={() => setSidebarOpen(false)}
+                          >
+                            <SubIcon className="mr-3 h-4 w-4" />
+                            {subItem.name}
+                          </Link>
+                        )
+                      })}
+                    </div>
+                  )}
+                </div>
               )
             })}
           </div>
         </nav>
 
-        {/* User section */}
-        <div className="absolute bottom-0 w-full p-4 border-t border-gray-200">
+        {/* User section - Fixed at bottom */}
+        <div className="flex-shrink-0 w-full p-4 border-t border-gray-200 bg-white">
           <div className="flex items-center space-x-3 mb-4">
             <div className="w-10 h-10 bg-royal-gradient rounded-full flex items-center justify-center">
               <span className="text-white font-royal font-bold">JP</span>
