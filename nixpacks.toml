@@ -3,7 +3,13 @@ NODE_ENV = "production"
 PORT = "4173"
 
 [phases.setup]
-nixPkgs = ["nodejs-18_x", "npm-9_x"]
+nixPkgs = [
+  'nodejs-20_x',  # Updated to Node.js 20.x
+  'npm-9_x',
+  'python3'      # Added Python for native module builds
+]
+nixOverlays = ['https://github.com/railwayapp/nix-npm-overlay/archive/main.tar.gz']
+nixpkgsArchive = 'ffeebf0acf3ae8b29f8c7049cd911b9636efd7e7'
 
 [phases.install]
 cmds = [
