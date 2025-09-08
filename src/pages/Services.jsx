@@ -2,6 +2,7 @@ import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 import { Link } from 'react-router-dom'
 import { Crown, ArrowRight, Wrench, Users, Mic, CheckCircle, Star } from 'lucide-react'
+import SEO from '../components/common/SEO'
 
 const Services = () => {
   const [heroRef, heroInView] = useInView({ threshold: 0.3, triggerOnce: true })
@@ -107,12 +108,19 @@ const Services = () => {
   ]
 
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.8 }}
-      className="pt-24"
-    >
+    <>
+      <SEO
+        title="True North AI Services - Premium DFY AI Solutions, Consulting & Speaking"
+        description="Choose from True North AI's royal services: DFY AI Solutions ($50K+), AI Consulting ($25K+), and Speaking Engagements. Premium AI agency services with guaranteed ROI. Transform your business with Canada's leading AI experts."
+        keywords="AI services Canada, DFY AI solutions, AI consulting services, premium AI agency, artificial intelligence consulting, AI implementation, machine learning services, AI strategy consulting, enterprise AI solutions"
+        image="https://res.cloudinary.com/dyrwj6iwl/image/upload/v1757285058/Screenshot_2025-09-07_182252_g5knbj.png"
+      />
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.8 }}
+        className="pt-24"
+      >
       {/* Hero Section */}
       <section className="section-padding bg-gradient-to-br from-royal-900 via-royal-800 to-crown-900 text-white relative overflow-hidden">
         <div className="absolute inset-0">
@@ -375,7 +383,8 @@ const Services = () => {
           </motion.div>
         </div>
       </section>
-    </motion.div>
+      </motion.div>
+    </>
   )
 }
 

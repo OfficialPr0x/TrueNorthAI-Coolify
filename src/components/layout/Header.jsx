@@ -27,10 +27,12 @@ const Header = () => {
   const navItems = [
     { name: 'Home', path: '/' },
     { name: 'About', path: '/about' },
-    { 
-      name: 'Services', 
+    { name: 'Team', path: '/team' },
+    {
+      name: 'Services',
       path: '/services',
       submenu: [
+        { name: 'DFY Ecommerce', path: '/services/dfy-ecommerce' },
         { name: 'DFY Solutions', path: '/services/dfy' },
         { name: 'Consulting', path: '/services/consulting' },
         { name: 'Speaking', path: '/services/speaking' }

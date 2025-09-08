@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 import { Crown, Shield, Target, Award, Users, Globe } from 'lucide-react'
+import SEO from '../components/common/SEO'
 
 const About = () => {
   const [heroRef, heroInView] = useInView({ threshold: 0.3, triggerOnce: true })
@@ -56,12 +57,19 @@ const About = () => {
   ]
 
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.8 }}
-      className="pt-24"
-    >
+    <>
+      <SEO
+        title="About True North AI - Meet Canada's Premier AI Agency Founders & Mission"
+        description="Discover True North AI's story: Founded by Jaryd Paquette, Canada's leading AI agency delivering royal excellence in AI innovation, cybersecurity, and enterprise solutions. Learn about our mission to build AI that serves humanity."
+        keywords="about True North AI, Jaryd Paquette founder, Canadian AI company story, AI agency Canada mission, artificial intelligence innovation, cybersecurity experts, enterprise AI solutions, Canadian AI leadership"
+        image="https://res.cloudinary.com/dyrwj6iwl/image/upload/v1757285058/Screenshot_2025-09-07_182252_g5knbj.png"
+      />
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.8 }}
+        className="pt-24"
+      >
       {/* Hero Section */}
       <section className="section-padding bg-gradient-to-br from-royal-900 via-royal-800 to-crown-900 text-white relative overflow-hidden">
         <div className="absolute inset-0">
@@ -381,7 +389,8 @@ const About = () => {
           </motion.div>
         </div>
       </section>
-    </motion.div>
+      </motion.div>
+    </>
   )
 }
 

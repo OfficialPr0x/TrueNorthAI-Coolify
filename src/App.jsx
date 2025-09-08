@@ -11,6 +11,8 @@ import Speaking from './pages/Speaking'
 import Contact from './pages/Contact'
 import Blog from './pages/Blog'
 import BlogPost from './pages/BlogPost'
+import Team from './pages/Team'
+import DFYEcommerce from './pages/DFYEcommerce'
 import Admin from './pages/Admin'
 import ScrollToTop from './components/common/ScrollToTop'
 import CookiesPopup from './components/common/CookiesPopup'
@@ -35,6 +37,8 @@ const AppContent = () => {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
+            <Route path="/team" element={<Team />} />
+            <Route path="/services/dfy-ecommerce" element={<DFYEcommerce />} />
             <Route path="/services" element={<Services />} />
             <Route path="/services/dfy" element={<DFYServices />} />
             <Route path="/services/consulting" element={<Consulting />} />

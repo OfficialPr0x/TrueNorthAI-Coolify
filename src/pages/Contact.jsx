@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 import { Crown, Mail, Phone, MapPin, Clock, ArrowRight, Shield, CheckCircle } from 'lucide-react'
+import SEO from '../components/common/SEO'
 
 const Contact = () => {
   const [heroRef, heroInView] = useInView({ threshold: 0.3, triggerOnce: true })
@@ -58,12 +59,19 @@ const Contact = () => {
   ]
 
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.8 }}
-      className="pt-24"
-    >
+    <>
+      <SEO
+        title="Contact True North AI - Get Started with Canada's Premier AI Agency"
+        description="Ready to transform your business with AI? Contact True North AI today. Speak directly with Jaryd Paquette and our expert team. Premium AI consulting, DFY solutions, and strategic guidance. Get your free royal consultation."
+        keywords="contact True North AI, AI agency Canada contact, Jaryd Paquette contact, AI consulting quote, premium AI services, Canadian AI experts, AI strategy consultation, business AI transformation"
+        image="https://res.cloudinary.com/dyrwj6iwl/image/upload/v1757285058/Screenshot_2025-09-07_182252_g5knbj.png"
+      />
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.8 }}
+        className="pt-24"
+      >
       {/* Hero Section */}
       <section className="section-padding bg-gradient-to-br from-royal-900 via-royal-800 to-crown-900 text-white relative overflow-hidden">
         <div className="absolute inset-0">
@@ -441,7 +449,8 @@ const Contact = () => {
           </div>
         </div>
       </section>
-    </motion.div>
+      </motion.div>
+    </>
   )
 }
 

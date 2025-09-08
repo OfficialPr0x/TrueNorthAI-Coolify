@@ -2,16 +2,17 @@ import { useState, useEffect } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
-import { 
-  Search, 
-  Calendar, 
-  Clock, 
-  Tag, 
+import {
+  Search,
+  Calendar,
+  Clock,
+  Tag,
   ArrowRight,
   Eye,
   User,
   Filter
 } from 'lucide-react'
+import SEO from '../components/common/SEO'
 
 const Blog = () => {
   const [searchParams, setSearchParams] = useSearchParams()
@@ -134,7 +135,14 @@ const Blog = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-royal-50 via-white to-crown-50">
+    <>
+      <SEO
+        title="True North AI Blog - AI Insights, Technology Trends & Industry Expertise"
+        description="Stay ahead of the AI curve with True North AI's expert blog. In-depth articles on artificial intelligence, machine learning, cybersecurity, and enterprise technology. Insights from Canada's leading AI agency."
+        keywords="AI blog, artificial intelligence insights, machine learning trends, AI technology news, cybersecurity blog, enterprise AI strategies, AI industry news, Canadian AI experts, technology innovation"
+        image="https://res.cloudinary.com/dyrwj6iwl/image/upload/v1757285058/Screenshot_2025-09-07_182252_g5knbj.png"
+      />
+      <div className="min-h-screen bg-gradient-to-br from-royal-50 via-white to-crown-50">
       {/* Hero Section */}
       <section className="relative py-20 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-royal-900 via-royal-800 to-crown-900"></div>
@@ -385,7 +393,8 @@ const Blog = () => {
           </motion.div>
         )}
       </div>
-    </div>
+      </div>
+    </>
   )
 }
 
