@@ -1,35 +1,40 @@
-# Multi-stage build for both applications
-FROM node:18-alpine AS base
+FROM node:20-slim
+
+# Install system dependencies required for better-sqlite3
+RUN apt-get update && apt-get install -y \
+    python3 \
+    build-essential \
+    gcc \
+    g++ \
+    make \
+    pkg-config \
+    sqlite3 \
+    libsqlite3-dev \
+    && rm -rf /var/lib/apt/lists/*
+
+# Set working directory
+WORKDIR /app
+
+# Copy package files first to leverage Docker cache
+COPY package*.json ./
+COPY server/package*.json ./server/
+COPY TrueNorthAdmin/package*.json ./TrueNorthAdmin/
 
 # Install dependencies
-WORKDIR /app
-COPY package*.json ./
 RUN npm ci
+RUN cd TrueNorthAdmin && npm ci
+RUN cd server && npm ci
 
-# Build main website
-WORKDIR /app
-COPY package*.json ./
-RUN npm ci
+# Copy application code
 COPY . .
-RUN npm run build
 
-# Build admin dashboard
-WORKDIR /app/TrueNorthAdmin
-COPY TrueNorthAdmin/package*.json ./
-RUN npm ci
-COPY TrueNorthAdmin/ .
-RUN npm run build
+# Build application
+RUN npm run build:main
+RUN npm run build:admin
+RUN npm run build:combine
 
-# Production stage
-FROM nginx:alpine AS production
+# Expose port
+EXPOSE 4173
 
-# Copy built applications
-COPY --from=base /app/dist /usr/share/nginx/html
-COPY --from=base /app/TrueNorthAdmin/dist /usr/share/nginx/html/admin-dashboard
-
-# Copy nginx configuration
-COPY nginx.conf /etc/nginx/nginx.conf
-
-EXPOSE 80
-
-CMD ["nginx", "-g", "daemon off;"]
+# Start application
+CMD ["node", "server.js"]
