@@ -8,7 +8,7 @@ nixPkgs = [
   'npm-9_x',
   'python3',
   'gcc',  # Required for native module compilation
-  'make',
+  'gnumake',
   'pkg-config'
 ]
 nixOverlays = ['https://github.com/railwayapp/nix-npm-overlay/archive/main.tar.gz']
