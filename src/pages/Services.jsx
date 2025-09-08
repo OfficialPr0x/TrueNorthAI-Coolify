@@ -397,7 +397,27 @@ const Services = () => {
               >
                 Schedule Royal Consultation
               </motion.button>
-              
+
+              <Link to="/financing">
+                <motion.button
+                  className="bg-crown-gradient text-white font-royal font-semibold text-lg px-8 py-4 rounded-xl hover:shadow-lg transition-all duration-300"
+                  whileHover={{ scale: 1.05, y: -2 }}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  Explore Financing Options
+                </motion.button>
+              </Link>
+
+              <Link to="/tools">
+                <motion.button
+                  className="bg-gradient-to-r from-blue-600 to-blue-800 text-white font-royal font-semibold text-lg px-8 py-4 rounded-xl hover:shadow-lg transition-all duration-300"
+                  whileHover={{ scale: 1.05, y: -2 }}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  Discover AI Tools
+                </motion.button>
+              </Link>
+
               <motion.button
                 className="bg-white/10 backdrop-blur-sm text-white font-royal font-semibold text-lg px-8 py-4 rounded-xl border border-white/20 hover:bg-white/20 transition-all duration-300"
                 whileHover={{ scale: 1.05, y: -2 }}

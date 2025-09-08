@@ -14,6 +14,8 @@ import BlogPost from './pages/BlogPost'
 import Team from './pages/Team'
 import DFYEcommerce from './pages/DFYEcommerce'
 import DFYAutomations from './pages/DFYAutomations'
+import Financing from './pages/Financing'
+import Tools from './pages/Tools'
 import Admin from './pages/Admin'
 import ScrollToTop from './components/common/ScrollToTop'
 import CookiesPopup from './components/common/CookiesPopup'
@@ -57,6 +59,8 @@ const AppContent = () => {
             <Route path="/team/harry-daniel-price" element={<HarryDanielPrice />} />
             <Route path="/services/dfy-ecommerce" element={<DFYEcommerce />} />
             <Route path="/services/dfy-automations" element={<DFYAutomations />} />
+            <Route path="/financing" element={<Financing />} />
+            <Route path="/tools" element={<Tools />} />
             <Route path="/services" element={<Services />} />
             <Route path="/services/dfy" element={<DFYServices />} />
             <Route path="/services/consulting" element={<Consulting />} />
