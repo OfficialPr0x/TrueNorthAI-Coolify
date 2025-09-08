@@ -4,8 +4,8 @@ PORT = "4173"
 
 [phases.setup]
 nixPkgs = [
-  'nodejs-20_x',
-  'npm-9_x',
+  'nodejs_20',
+  'nodePackages.npm',
   'python3',
   'gcc',  # Required for native module compilation
   'gnumake',
