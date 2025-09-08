@@ -148,7 +148,7 @@ The system is configured with your production API key (`cal_live_cc827d674446450
 **Current Status:**
 - 🔗 Connected to: team@truenorthai.group
 - 📅 Event Types: Ready for configuration
-- 📧 Fallback: jaryd@truenorthai.group
+- 📧 Contact: team@truenorthai.group
 
 ## 📞 Support
 

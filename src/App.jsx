@@ -13,11 +13,21 @@ import Blog from './pages/Blog'
 import BlogPost from './pages/BlogPost'
 import Team from './pages/Team'
 import DFYEcommerce from './pages/DFYEcommerce'
+import DFYAutomations from './pages/DFYAutomations'
 import Admin from './pages/Admin'
 import ScrollToTop from './components/common/ScrollToTop'
 import CookiesPopup from './components/common/CookiesPopup'
 import EliteBookingPopup from './components/common/EliteBookingPopup'
 import { ElitePopupProvider, useElitePopup } from './hooks/useElitePopup.jsx'
+
+// Team Member Pages
+import JarydPaquette from './pages/team/JarydPaquette'
+import GavinWilliams from './pages/team/GavinWilliams'
+import CurtisShaw from './pages/team/CurtisShaw'
+import ChrisBain from './pages/team/ChrisBain'
+import GuilliaumeCouture from './pages/team/GuilliaumeCouture'
+import SabikTawsif from './pages/team/SabikTawsif'
+import HarryDanielPrice from './pages/team/HarryDanielPrice'
 
 const AppContent = () => {
   const { isElitePopupOpen, closeElitePopup } = useElitePopup()
@@ -38,7 +48,15 @@ const AppContent = () => {
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
             <Route path="/team" element={<Team />} />
+            <Route path="/team/jaryd-paquette" element={<JarydPaquette />} />
+            <Route path="/team/gavin-williams" element={<GavinWilliams />} />
+            <Route path="/team/curtis-shaw" element={<CurtisShaw />} />
+            <Route path="/team/chris-bain" element={<ChrisBain />} />
+            <Route path="/team/guilliaume-couture" element={<GuilliaumeCouture />} />
+            <Route path="/team/sabik-tawsif" element={<SabikTawsif />} />
+            <Route path="/team/harry-daniel-price" element={<HarryDanielPrice />} />
             <Route path="/services/dfy-ecommerce" element={<DFYEcommerce />} />
+            <Route path="/services/dfy-automations" element={<DFYAutomations />} />
             <Route path="/services" element={<Services />} />
             <Route path="/services/dfy" element={<DFYServices />} />
             <Route path="/services/consulting" element={<Consulting />} />

@@ -19,14 +19,14 @@ async function seedDatabase() {
     const hashedPassword = await bcrypt.hash('admin123', 12)
 
     await db.insert(schema.users).values({
-      email: 'admin@truenorthai.group',
+      email: 'team@truenorthai.group',
       password: hashedPassword,
       firstName: 'Jaryd',
       lastName: 'Paquette',
       role: 'admin'
     })
 
-    console.log('✅ Created admin user: admin@truenorthai.group')
+    console.log('✅ Created admin user: team@truenorthai.group')
 
     // Create sample contacts
     const sampleContacts = [
@@ -111,7 +111,7 @@ async function seedDatabase() {
     console.log('✅ Created sample leads')
 
     console.log('🎉 Database seeding completed successfully!')
-    console.log('📧 Admin login: admin@truenorthai.group / admin123')
+    console.log('📧 Admin login: team@truenorthai.group / admin123')
 
   } catch (error) {
     console.error('❌ Seeding failed:', error)

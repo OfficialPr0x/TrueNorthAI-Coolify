@@ -20,7 +20,7 @@ const Settings = () => {
       description: 'Manage your personal information and preferences',
       settings: [
         { name: 'Full Name', value: 'Jaryd Paquette', type: 'text' },
-        { name: 'Email', value: 'jaryd@truenorthai.com', type: 'email' },
+        { name: 'Email', value: 'team@truenorthai.group', type: 'email' },
         { name: 'Title', value: 'Founder & CEO', type: 'text' },
         { name: 'Bio', value: 'Battle-tested AI systems architect with a decade of cybersecurity experience.', type: 'textarea' }
       ]

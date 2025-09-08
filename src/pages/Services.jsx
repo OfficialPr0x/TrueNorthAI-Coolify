@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 import { Link } from 'react-router-dom'
-import { Crown, ArrowRight, Wrench, Users, Mic, CheckCircle, Star } from 'lucide-react'
+import { Crown, ArrowRight, Wrench, Users, Mic, CheckCircle, Star, Zap } from 'lucide-react'
 import SEO from '../components/common/SEO'
 
 const Services = () => {
@@ -16,7 +16,7 @@ const Services = () => {
       description: "Premium AI implementations delivered turnkey. We handle everything from strategy to deployment while you focus on reaping the royal rewards.",
       features: [
         "Custom AI Development & Architecture",
-        "Full Implementation & Integration", 
+        "Full Implementation & Integration",
         "Comprehensive Training & Documentation",
         "6-Month Optimization & Support",
         "24/7 Priority Royal Support",
@@ -33,6 +33,32 @@ const Services = () => {
       gradient: "from-crown-600 to-crown-800",
       bgGradient: "from-crown-50 to-crown-100",
       popular: true
+    },
+    {
+      icon: Zap,
+      title: "DFY Automations",
+      subtitle: "GHL & N8N Infrastructure",
+      description: "Complete automation setup with Go High Level and N8N workflows. Streamline lead generation, customer communication, and operational processes.",
+      features: [
+        "Go High Level CRM Setup & Configuration",
+        "N8N Workflow Automation Platform",
+        "Lead Generation & Qualification Systems",
+        "Email & SMS Marketing Automation",
+        "Customer Service Chatbots",
+        "Multi-Platform Integration",
+        "Custom Reporting Dashboards",
+        "Ongoing Management & Support"
+      ],
+      pricing: {
+        starting: "$8,500",
+        typical: "$18,500 - $45,000",
+        enterprise: "Custom Scaling Solutions"
+      },
+      timeline: "21-90 Days",
+      guarantee: "Automation Success Guarantee",
+      link: "/services/dfy-automations",
+      gradient: "from-blue-600 to-blue-800",
+      bgGradient: "from-blue-50 to-blue-100"
     },
     {
       icon: Users,

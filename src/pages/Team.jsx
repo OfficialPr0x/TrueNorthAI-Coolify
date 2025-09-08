@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
-import { Users, Crown, Shield, Target, Award, Globe, Code, Brain, Heart, Zap, Star } from 'lucide-react'
+import { Link } from 'react-router-dom'
+import { Users, Crown, Shield, Target, Award, Globe, Code, Brain, Heart, Zap, Star, ArrowRight } from 'lucide-react'
 import SEO from '../components/common/SEO'
 
 const Team = () => {
@@ -11,6 +12,7 @@ const Team = () => {
   const teamMembers = [
     {
       name: "Jaryd Paquette",
+      slug: "jaryd-paquette",
       title: "Founder & Chief AI Architect",
       image: "https://res.cloudinary.com/dyrwj6iwl/image/upload/v1757286285/480915276_1207102460982174_7213407615650576209_n_rohbcy.jpg",
       description: "Machine learning engineer, cybersecurity strategist, and AI systems architect with a decade of hands-on enterprise experience.",
@@ -22,6 +24,7 @@ const Team = () => {
     },
     {
       name: "Gavin Williams",
+      slug: "gavin-williams",
       title: "Co-Founder & Growth Architect",
       image: "https://res.cloudinary.com/dyrwj6iwl/image/upload/v1757285699/541734346_1120496356190113_9018162841045591862_n_lgaarg.jpg",
       description: "Growth architect and Meta advertising specialist who builds diagonal scaling systems that sustain ROAS even at high budgets where most campaigns collapse.",
@@ -33,6 +36,7 @@ const Team = () => {
     },
     {
       name: "Curtis Shaw",
+      slug: "curtis-shaw",
       title: "Head of Product & Design",
       initials: "CS",
       description: "Product strategist and UX designer with expertise in human-centered AI product development.",
@@ -44,8 +48,9 @@ const Team = () => {
     },
     {
       name: "Chris Bain",
+      slug: "chris-bain",
       title: "VP of Operations",
-      initials: "CB",
+      image: "https://res.cloudinary.com/dyrwj6iwl/image/upload/v1757312793/484170455_10232098940608817_3950433760998616105_n_ds39ad.jpg",
       description: "Operations strategist and business development expert with a focus on scaling AI-driven organizations.",
       background: "Chris brings operational excellence and business development expertise to ensure our AI solutions reach the right markets and deliver measurable business impact.",
       expertise: ["Business Operations", "Strategic Planning", "Business Development", "Operations Excellence"],
@@ -55,17 +60,19 @@ const Team = () => {
     },
     {
       name: "Guilliaume Couture",
-      title: "Lead AI Engineer",
-      initials: "GC",
-      description: "AI engineer and machine learning specialist focused on implementing cutting-edge AI solutions.",
-      background: "Guilliaume combines theoretical AI knowledge with practical engineering experience to build robust, production-ready AI systems that solve real-world problems.",
-      expertise: ["AI Engineering", "Machine Learning", "Model Deployment", "Python Development"],
+      slug: "guilliaume-couture",
+      title: "Lead UI/UX & Fullstack Game Developer",
+      image: "https://res.cloudinary.com/dyrwj6iwl/image/upload/v1757313734/508474909_3242274312586976_4090981101001277288_n_l6qtm1.jpg",
+      description: "Lead UI/UX Designer and Fullstack Game Developer specializing in creating immersive gaming experiences and intuitive user interfaces.",
+      background: "Guilliaume is a passionate UI/UX designer and fullstack game developer who brings creativity and technical expertise together to create exceptional user experiences. His unique blend of artistic vision and technical proficiency allows him to design interfaces that are both beautiful and functional.",
+      expertise: ["UI/UX Design", "Fullstack Game Development", "Interactive Design", "User Experience Research"],
       icon: Brain,
-      achievements: ["Deployed ML models at scale", "Built AI production systems", "Research-to-production expert", "Performance optimization leader"],
-      quote: "The gap between AI research and production is where real innovation happens. We bridge that gap every day."
+      achievements: ["Launched award-winning games", "Built immersive user experiences", "Led creative development teams", "User experience excellence"],
+      quote: "Great design is invisible. It creates experiences that feel natural, engaging, and unforgettable without ever drawing attention to itself."
     },
     {
       name: "Sabik Tawsif",
+      slug: "sabik-tawsif",
       title: "AI Research Scientist",
       initials: "ST",
       description: "Research scientist specializing in advanced AI algorithms and their practical applications.",
@@ -77,6 +84,7 @@ const Team = () => {
     },
     {
       name: "Harry Daniel Price",
+      slug: "harry-daniel-price",
       title: "Strategic Relationships Manager",
       image: "https://res.cloudinary.com/dyrwj6iwl/image/upload/v1757292755/464087716_8653744111351797_7862541738659338804_n_k8yz8y.jpg",
       description: "Strategic partnerships expert with extensive experience in business growth, operations, and relationship building.",
@@ -262,9 +270,11 @@ const Team = () => {
                   <div className="flex-1 text-center lg:text-left">
                     <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between mb-4">
                       <div>
-                        <h3 className="font-royal font-bold text-3xl text-royal-800 mb-2 group-hover:text-crown-600 transition-colors">
-                          {member.name}
-                        </h3>
+                        <Link to={`/team/${member.slug}`}>
+                          <h3 className="font-royal font-bold text-3xl text-royal-800 mb-2 group-hover:text-crown-600 transition-colors hover:underline">
+                            {member.name}
+                          </h3>
+                        </Link>
                         <p className="font-elegant text-xl text-crown-600 mb-4">
                           {member.title}
                         </p>
@@ -322,6 +332,20 @@ const Team = () => {
                         </div>
                       </div>
                     )}
+
+                    {/* View Profile Button */}
+                    <div className="mt-6 flex justify-center lg:justify-start">
+                      <Link to={`/team/${member.slug}`}>
+                        <motion.button
+                          className="inline-flex items-center space-x-2 bg-royal-gradient text-white px-6 py-3 rounded-xl font-royal font-medium hover:shadow-lg transition-all duration-300"
+                          whileHover={{ scale: 1.05 }}
+                          whileTap={{ scale: 0.95 }}
+                        >
+                          <span>View Full Profile</span>
+                          <ArrowRight className="w-4 h-4" />
+                        </motion.button>
+                      </Link>
+                    </div>
                   </div>
                 </div>
               </motion.div>

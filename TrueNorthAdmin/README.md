@@ -182,7 +182,7 @@ This dashboard embodies True North AI's core philosophy:
 ## 📞 Support
 
 For technical support or feature requests:
-- **Email**: admin@truenorthai.com
+- **Email**: team@truenorthai.group
 - **Internal**: Slack #admin-dashboard channel
 - **Documentation**: Internal wiki for detailed procedures
 

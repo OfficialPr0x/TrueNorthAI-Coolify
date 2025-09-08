@@ -107,14 +107,14 @@ db.prepare(`
   VALUES (?, ?, ?, ?, ?, ?)
 `).run(
   'user-admin',
-  'admin@truenorthai.group',
+  'team@truenorthai.group',
   hashedPassword,
   'Jaryd',
   'Paquette',
   'admin'
 )
 
-console.log('✅ Admin user created: admin@truenorthai.group / admin123')
+console.log('✅ Admin user created: team@truenorthai.group / admin123')
 
 // Sample contacts
 const contacts = [

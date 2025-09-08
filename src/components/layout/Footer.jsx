@@ -163,7 +163,7 @@ const Footer = () => {
               </div>
               <div>
                 <p className="font-royal font-semibold text-white text-lg">Email Us</p>
-                <p className="font-modern">contact@truenorthai.com</p>
+                <p className="font-modern">team@truenorthai.group</p>
               </div>
             </div>
             <div className="flex items-center space-x-4 text-royal-200">

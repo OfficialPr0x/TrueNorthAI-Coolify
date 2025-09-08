@@ -12,7 +12,7 @@ const Contact = () => {
       icon: Mail,
       title: "Email Us",
       description: "Get a real response within 24 hours",
-      contact: "contact@truenorthai.com",
+      contact: "team@truenorthai.group",
       action: "Send Email"
     },
     {
