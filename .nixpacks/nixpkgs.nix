@@ -5,11 +5,13 @@ let
     ];
   };
 in
-with pkgs; [
-  nodejs-20_x
-  npm-9_x
-  python3
-  gcc
-  make
-  pkg-config
-]
+pkgs.mkShell {
+  buildInputs = with pkgs; [
+    nodejs-20_x
+    npm-9_x
+    python3
+    gnumake
+    gcc
+    pkg-config
+  ];
+}

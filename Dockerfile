@@ -1,4 +1,4 @@
-FROM node:20-slim
+FROM node:20
 
 # Install system dependencies required for better-sqlite3
 RUN apt-get update && apt-get install -y \
@@ -20,10 +20,10 @@ COPY package*.json ./
 COPY server/package*.json ./server/
 COPY TrueNorthAdmin/package*.json ./TrueNorthAdmin/
 
-# Install dependencies
-RUN npm ci
-RUN cd TrueNorthAdmin && npm ci
-RUN cd server && npm ci
+# Install dependencies with --force to bypass compatibility issues
+RUN npm ci --force
+RUN cd TrueNorthAdmin && npm ci --force
+RUN cd server && npm ci --force
 
 # Copy application code
 COPY . .
