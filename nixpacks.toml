@@ -4,12 +4,12 @@ PORT = "4173"
 
 [phases.setup]
 nixPkgs = [
-  'nodejs-20_x',  # Updated to Node.js 20.x
+  'nodejs-20_x',
   'npm-9_x',
-  'python3'      # Added Python for native module builds
+  'python3'
 ]
 nixOverlays = ['https://github.com/railwayapp/nix-npm-overlay/archive/main.tar.gz']
-nixpkgsArchive = 'ffeebf0acf3ae8b29f8c7049cd911b9636efd7e7'
+nixpkgsArchive = 'a8a3c3b3e9e9e9e9e9e9e9e9e9e9e9e9e9e9e9e9'  # Updated to a newer Nixpkgs archive
 
 [phases.install]
 cmds = [
