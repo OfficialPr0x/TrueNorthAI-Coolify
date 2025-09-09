@@ -14,6 +14,6 @@ buildEnv {
     } ''
       mkdir -p $out
     '')
-    gcc gnumake nodejs_20 nodePackages.npm python3 pkg-config
+    gcc gnumake nodejs nodePackages.npm python3 pkg-config
   ];
 }
